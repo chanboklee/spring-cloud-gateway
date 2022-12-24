@@ -5,10 +5,11 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+// @Configuration
 public class FliterConfig {
 
-    @Bean
+    // application.yml에서 route 정보를 설정하지 않고 @Bean으로 등록하여 사용하는 방
+    // @Bean
     public RouteLocator gateway(RouteLocatorBuilder builder){
         return builder.routes()
                 .route(r -> r.path("/first-service/**")
