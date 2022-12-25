@@ -20,6 +20,10 @@ spring:
             preLogger: true
             postLogger: true
       routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/**
         - id: first-service
           # 등록한 application name..
           uri: lb://FIRST-SERVICE
@@ -29,7 +33,7 @@ spring:
             - name: CustomFilter
             - name: LoggingFilter
               args:
-                baseMessage: Hi, there
+                baseMessage: Spring Cloud Gateway Logging Filter
                 preLogger: true
                 postLogger: true
 #            - AddRequestHeader=first-request, first-request-header
