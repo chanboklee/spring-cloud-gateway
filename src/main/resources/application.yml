@@ -54,6 +54,7 @@ spring:
           predicates:
             - Path=/user-service/**
             - Method=GET
+            - AuthorizationHeaderFilter
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
@@ -80,3 +81,6 @@ spring:
 #            - AddRequestHeader=second-request, second-request-header
 #            - AddResponseHeader=second-response, second-response-header
             - name: CustomFilter
+
+token:
+  secret: user_token
