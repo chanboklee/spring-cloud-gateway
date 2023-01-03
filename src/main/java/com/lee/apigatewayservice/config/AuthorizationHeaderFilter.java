@@ -15,11 +15,14 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 @Component
-@RequiredArgsConstructor
 @Slf4j
 public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<AuthorizationHeaderFilter.Config> {
 
-    private final Environment env;
+    Environment env;
+    public AuthorizationHeaderFilter(Environment env){
+        super(Config.class);
+        this.env = env;
+    }
 
     public static class Config {
 
@@ -39,7 +42,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
                 return onError(exchange, "JWT token is not valid", HttpStatus.UNAUTHORIZED);
             }
             return chain.filter(exchange);
-        });
+        };
     }
 
     private boolean isJwtValid(String jwt) {
